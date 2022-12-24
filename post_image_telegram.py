@@ -16,7 +16,20 @@ def main():
     post_image(telegram_bot, post_delay_time)
     
 
+def post_image(bot, post_delay_time=14400):       
+    
+    dir_images = getenv('DIR_IMAGES')
+    image_files = (path.resolve() for path in Path(dir_images).glob("**/*") 
+                    if path.suffix in {".png", ".gif", ".jpg", ".jpeg"})
+    image_files = list(map(str, image_files))
+    shuffle(image_files)
 
+    chat_id = getenv('CHAT_ID')
+    current_file = 0
+    while True:
+        bot.send_photo(chat_id=chat_id, photo=open(image_files[current_file], 'rb'))
+        sleep(post_delay_time)
+        current_file += 1
 
 
 if __name__ == "__main__":
