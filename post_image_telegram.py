@@ -32,6 +32,17 @@ def post_image(bot, post_delay_time=14400):
         current_file += 1
 
 
+def create_parser_delay_time():
+
+    parcer = argparse.ArgumentParser(
+        description='Программа загружает в телеграмм-канал фотографии'
+    )
+    parcer.add_argument('dtime', help='Введите время задержки загрузки файла в секундах')
+    args = parcer.parse_args()
+
+    return int(args.dtime)
+
+
 if __name__ == "__main__":
 
     main()
