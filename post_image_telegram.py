@@ -18,12 +18,10 @@ def main():
 
 def post_image(bot, post_delay_time=14400):       
     
-    dir_images = getenv('DIR_IMAGES')
-    image_files = (path.resolve() for path in Path(dir_images).glob("**/*") 
+    image_files = (path.resolve() for path in Path(Path.cwd()).glob("**/*") 
                     if path.suffix in {".png", ".gif", ".jpg", ".jpeg"})
     image_files = list(map(str, image_files))
-    shuffle(image_files)
-
+    shuffle(image_files)    
     chat_id = getenv('CHAT_ID')
     current_file = 0
     while True:
@@ -37,7 +35,7 @@ def create_parser_delay_time():
     parcer = argparse.ArgumentParser(
         description='Программа загружает в телеграмм-канал фотографии'
     )
-    parcer.add_argument('dtime', help='Введите время задержки загрузки файла в секундах')
+    parcer.add_argument('-dt', '--dtime', default=14400, help='Введите время задержки загрузки файла в секундах')
     args = parcer.parse_args()
 
     return int(args.dtime)
