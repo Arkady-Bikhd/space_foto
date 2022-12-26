@@ -22,7 +22,7 @@ def post_image(bot, post_delay_time=14400):
                     if path.suffix in {".png", ".gif", ".jpg", ".jpeg"})
     image_files = list(map(str, image_files))
     shuffle(image_files)    
-    chat_id = environ['CHAT_ID']
+    tg_chat_id = environ['TG_CHAT_ID']
     current_file = 0
     while True:
         with open(image_files[current_file], 'rb') as file:
