@@ -41,10 +41,10 @@ def fetch_spacex_last_launch(spacex_id):
             print('Фотографии последнего запуска не найдены.')
             print('Загружаются фотографии запуска по умолчанию.')
             images_links = get_spacex_launch_links(default_id)
-    dir = 'images'
+    image_dir = 'images'
     for link_number, link in enumerate(images_links):
         image_file = f'spacex{link_number}.jpg'        
-        get_image(link, image_file, dir)
+        get_image(link, image_file, image_dir)
 
 
 def create_parser_link():

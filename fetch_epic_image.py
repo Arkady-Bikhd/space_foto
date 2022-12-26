@@ -33,11 +33,11 @@ def fetch_epic():
         return images_date, epic_links
 
     image_date, image_links = get_epic_links(url_params)
-    dir = 'epic_image'
+    image_dir = 'epic_image'
     for link_number, link in enumerate(image_links):
         url = f'https://api.nasa.gov/EPIC/archive/natural/{image_date}/png/{link}.png'
         image_file = f'epic_{link_number}.png'
-        get_image(url, image_file, dir, url_params)
+        get_image(url, image_file, image_dir, url_params)
 
 
 if __name__ == "__main__":

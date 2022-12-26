@@ -26,7 +26,7 @@ def post_image(bot, post_delay_time=14400):
     current_file = 0
     while True:
         with open(image_files[current_file], 'rb') as file:
-            bot.send_photo(chat_id=chat_id, photo=file)
+            bot.send_photo(chat_id=tg_chat_id, photo=file)
         sleep(post_delay_time)
         current_file += 1
 

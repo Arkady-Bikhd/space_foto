@@ -35,11 +35,11 @@ def fetch_nasa_apod():
 
     count_images = randint(30, 51)    
     images_links = get_nasa_apod_links(count_images)
-    dir = 'nasa_images'
+    image_dir = 'nasa_images'
     for link_number, link in enumerate(images_links):
         file_extension = fetch_file_extension(link)
         image_file = f'nasa{link_number}.{file_extension}'        
-        get_image(link, image_file, dir)
+        get_image(link, image_file, image_dir)
 
 
 if __name__ == "__main__":
