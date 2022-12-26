@@ -3,7 +3,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 
-def get_image(url, image_file, image_dir, url_params=''):
+def get_image(url, image_file, image_dir, url_params=None):
 
     response = requests.get(url, params=url_params)
     response.raise_for_status()
