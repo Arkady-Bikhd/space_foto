@@ -28,8 +28,9 @@ def fetch_nasa_apod():
         response = requests.get(url, params=url_params)
         response.raise_for_status()
         apod_links = list()
-        for link_number in range(len(response.json())):
-            apod_links.append(response.json()[link_number]['hdurl'])
+        response_json = response.json()
+        for link_number in range(len(response_json)):
+            apod_links.append(response_json[link_number]['hdurl'])
             
         return apod_links
 

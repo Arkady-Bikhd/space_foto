@@ -18,7 +18,7 @@ def get_spacex_launch_links(spacex_id):
     if response.ok:
         return response.json()['links']['flickr_images']
     else:
-        return list()
+        return
 
 
 def get_spacex_launch_links_latest():

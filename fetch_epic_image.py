@@ -15,9 +15,9 @@ def main():
 def fetch_epic():
 
     load_dotenv()
-    api_key_nasa = environ['API_KEY_NASA']
+    nasa_api_key = environ['NASA_API_KEY']
     url_params = {
-            'api_key': api_key_nasa}
+            'api_key': nasa_api_key}
     
     def get_epic_links(url_params):
         
@@ -25,11 +25,12 @@ def fetch_epic():
         response = requests.get(url, params=url_params)
         response.raise_for_status()
         epic_links = list()
-        images_date = response.json()[0]['date']
+        response_json = response.json()
+        images_date = response_json[0]['date']
         images_date = images_date.split(' ')[0]
-        images_date = images_date.replace('-', '/')
-        for link_number in range(len(response.json())):
-            epic_links.append(response.json()[link_number]['image'])
+        images_date = images_date.replace('-', '/')        
+        for link_number in range(len(response_json)):
+            epic_links.append(response_json[link_number]['image'])
         return images_date, epic_links
 
     image_date, image_links = get_epic_links(url_params)
