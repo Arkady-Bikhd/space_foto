@@ -2,15 +2,14 @@ import requests
 from random import randint
 from getimageslib import get_image, fetch_file_extension
 from dotenv import load_dotenv
-from os import getenv
+from os import environ
 
 
 def main():
 
     load_dotenv()
     global api_key_nasa
-    api_key_nasa = getenv('API_KEY_NASA')
-    print(api_key_nasa)
+    api_key_nasa = environ['API_KEY_NASA']    
     try:           
         fetch_nasa_apod()        
     except requests.exceptions.HTTPError:

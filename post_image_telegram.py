@@ -1,6 +1,6 @@
 import telegram
 from dotenv import load_dotenv
-from os import getenv
+from os import environ
 from pathlib import Path
 from random import shuffle
 from time import sleep
@@ -11,7 +11,7 @@ def main():
 
     load_dotenv()
     post_delay_time = create_parser_delay_time()
-    telegram_token = getenv('TELEGRAM_TOKEN')
+    telegram_token = environ ['TELEGRAM_TOKEN']
     telegram_bot = telegram.Bot(telegram_token)
     post_image(telegram_bot, post_delay_time)
     
@@ -22,7 +22,7 @@ def post_image(bot, post_delay_time=14400):
                     if path.suffix in {".png", ".gif", ".jpg", ".jpeg"})
     image_files = list(map(str, image_files))
     shuffle(image_files)    
-    chat_id = getenv('CHAT_ID')
+    chat_id = environ['CHAT_ID']
     current_file = 0
     while True:
         with open(image_files[current_file], 'rb') as file:

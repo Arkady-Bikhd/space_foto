@@ -1,13 +1,12 @@
 import requests
 from getimageslib import get_image
 from dotenv import load_dotenv
-from os import getenv
+from os import environ
 
 
 def main():    
 
-            
-    try:    
+    try:
         fetch_epic()
     except requests.exceptions.HTTPError:
         print('Неверная ссылка на загрузку фотографий или неверный api_key')
@@ -16,7 +15,7 @@ def main():
 def fetch_epic():
 
     load_dotenv()
-    api_key_nasa = getenv('API_KEY_NASA')
+    api_key_nasa = environ['API_KEY_NASA']
     url_params = {
             'api_key': api_key_nasa}
     
