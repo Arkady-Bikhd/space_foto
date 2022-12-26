@@ -1,7 +1,6 @@
 import requests
 from getimageslib import get_image
-from dotenv import load_dotenv
-from os import environ
+from get_env import nasa_api_key
 
 
 def main():    
@@ -14,8 +13,6 @@ def main():
 
 def fetch_epic():
 
-    load_dotenv()
-    nasa_api_key = environ['NASA_API_KEY']
     url_params = {
             'api_key': nasa_api_key}
     
