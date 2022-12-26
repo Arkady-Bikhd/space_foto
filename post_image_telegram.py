@@ -33,11 +33,11 @@ def post_image(bot, post_delay_time=14400):
 
 def create_parser_delay_time():
 
-    parcer = argparse.ArgumentParser(
+    parser = argparse.ArgumentParser(
         description='Программа загружает в телеграмм-канал фотографии'
     )
-    parcer.add_argument('-t', '--dtime', default=14400, help='Введите время задержки загрузки файла в секундах')
-    args = parcer.parse_args()
+    parser.add_argument('-t', '--dtime', default=14400, help='Введите время задержки загрузки файла в секундах')
+    args = parser.parse_args()
 
     return int(args.dtime)
 

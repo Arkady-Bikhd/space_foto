@@ -49,11 +49,11 @@ def fetch_spacex_last_launch(spacex_id):
 
 def create_parser_link():
 
-    parcer = argparse.ArgumentParser(
+    parser = argparse.ArgumentParser(
         description='Программа скачивает фотографии запусков SpaceX'
     )
-    parcer.add_argument('-n', '--number', default='66', help='Введите номер запуска')
-    args = parcer.parse_args()
+    parser.add_argument('-n', '--number', default='66', help='Введите номер запуска')
+    args = parser.parse_args()
 
     return args.number
 
