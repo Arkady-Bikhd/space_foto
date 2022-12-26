@@ -4,16 +4,16 @@ import argparse
 
 def main():
     
-    id = create_parser_link()
+    spacex_id = create_parser_link()
     try:    
-        fetch_spacex_last_launch(id)
+        fetch_spacex_last_launch(spacex_id)
     except requests.exceptions.HTTPError:
         print('Неверная ссылка на запуск SpaceX')
     
 
-def get_spacex_launch_links(id):
+def get_spacex_launch_links(spacex_id):
 
-    url = f'https://api.spacexdata.com/v3/launches/{id}'
+    url = f'https://api.spacexdata.com/v3/launches/{spacex_id}'
     response = requests.get(url)    
     if response.ok:
         return response.json()['links']['flickr_images']
@@ -29,12 +29,12 @@ def get_spacex_launch_links_latest():
     return response.json()['links']['flickr']['original']
 
 
-def fetch_spacex_last_launch(id):
+def fetch_spacex_last_launch(spacex_id):
     
     default_id = 66
-    images_links = get_spacex_launch_links(id)
+    images_links = get_spacex_launch_links(spacex_id)
     if not images_links:
-        print(f'Фотографий запуска с номером {id} не найдено.')
+        print(f'Фотографий запуска с номером {spacex_id} не найдено.')
         print('Осуществляется поиск фотогрфий последнего запуска.')
         images_links = get_spacex_launch_links_latest()        
         if not images_links:
@@ -52,10 +52,10 @@ def create_parser_link():
     parcer = argparse.ArgumentParser(
         description='Программа скачивает фотографии запусков SpaceX'
     )
-    parcer.add_argument('id', help='Введите номер запуска')
+    parcer.add_argument('-n', '--number', default='66', help='Введите номер запуска')
     args = parcer.parse_args()
 
-    return args.id
+    return args.number
 
 
 if __name__ == "__main__":
