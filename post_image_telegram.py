@@ -1,4 +1,5 @@
 import telegram
+from telegram.error import NetworkError
 from pathlib import Path
 from random import shuffle
 from time import sleep
@@ -20,11 +21,24 @@ def post_image(bot, post_delay_time=14400):
     image_files = list(map(str, image_files))
     shuffle(image_files) 
     current_file = 0
-    while True:
-        with open(image_files[current_file], 'rb') as file:
-            bot.send_photo(chat_id=tg_chat_id, photo=file)
-        sleep(post_delay_time)
-        current_file += 1
+    network_error = 0
+    while True:        
+        try:
+            with open(image_files[current_file], 'rb') as file:
+                bot.send_photo(chat_id=tg_chat_id, photo=file)
+            sleep(post_delay_time)
+            current_file += 1
+        except NetworkError:            
+            if not network_error:
+                sleep(1)
+                network_error += 1                
+            elif network_error < 3:
+                sleep(10)
+                network_error += 1                
+            else:
+                print('Ошибка подключения')                
+                break    
+                   
 
 
 def create_parser_delay_time():
