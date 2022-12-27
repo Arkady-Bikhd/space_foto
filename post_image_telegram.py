@@ -37,8 +37,7 @@ def post_image(bot, post_delay_time=14400):
                 network_error += 1                
             else:
                 print('Ошибка подключения')                
-                break    
-                   
+                break                       
 
 
 def create_parser_delay_time():
