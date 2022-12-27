@@ -1,6 +1,5 @@
 import requests
-from getimageslib import get_image
-from get_env import nasa_api_key
+from getimageslib import get_image, nasa_api_key
 
 
 def main():    

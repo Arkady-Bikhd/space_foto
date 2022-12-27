@@ -3,7 +3,7 @@ from pathlib import Path
 from random import shuffle
 from time import sleep
 import argparse
-from get_env import telegram_token, tg_chat_id
+from getimageslib import telegram_token, tg_chat_id
 
 
 def main():

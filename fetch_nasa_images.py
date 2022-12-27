@@ -1,7 +1,6 @@
 import requests
 from random import randint
-from getimageslib import get_image, fetch_file_extension
-from get_env import nasa_api_key
+from getimageslib import get_image, fetch_file_extension, nasa_api_key
 
 
 def main():
