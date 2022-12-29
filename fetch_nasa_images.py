@@ -13,29 +13,21 @@ def main():
 
 def fetch_nasa_apod():
 
-    def get_nasa_apod_links(images_count):
-        
-        url_params = {
+    images_count = randint(30, 51)
+    url_params = {
             'api_key': get_nasa_api_key(),
             'count': images_count
         }
-        url = 'https://api.nasa.gov/planetary/apod'
-        response = requests.get(url, params=url_params)
-        response.raise_for_status()
-        apod_links = list()
-        response_json = response.json()
-        for link_number in range(len(response_json)):
-            apod_links.append(response_json[link_number]['hdurl'])
-            
-        return apod_links
-
-    images_count = randint(30, 51)    
-    images_links = get_nasa_apod_links(images_count)
+    url = 'https://api.nasa.gov/planetary/apod'
+    response = requests.get(url, params=url_params)
+    response.raise_for_status()    
+    response = response.json() 
     image_dir = 'nasa_images'
-    for link_number, link in enumerate(images_links):
-        file_extension = fetch_file_extension(link)
+    for link_number, link in enumerate(response):
+        image_link = link['hdurl']
+        file_extension = fetch_file_extension(image_link)
         image_file = f'nasa{link_number}.{file_extension}'        
-        get_image(link, image_file, image_dir)
+        get_image(image_link, image_file, image_dir)
 
 
 if __name__ == "__main__":

@@ -11,22 +11,20 @@ def main():
         print('Неверная ссылка на запуск SpaceX')
     
 
-def get_spacex_launch_links(spacex_id):
+def get_spacex_launch_links(spacex_id=0, latest=False):
 
-    url = f'https://api.spacexdata.com/v3/launches/{spacex_id}'
-    response = requests.get(url)    
-    if response.ok:
-        return response.json()['links']['flickr_images']
-    else:
-        return
-
-
-def get_spacex_launch_links_latest():
-
-    url = 'https://api.spacexdata.com/v5/launches/latest'
-    response = requests.get(url)
-    response.raise_for_status()
-    return response.json()['links']['flickr']['original']
+    if latest:
+        url = 'https://api.spacexdata.com/v5/launches/latest'
+        response = requests.get(url)
+        response.raise_for_status()
+        return response.json()['links']['flickr']['original']
+    else: 
+        url = f'https://api.spacexdata.com/v3/launches/{spacex_id}'
+        response = requests.get(url)    
+        if response.ok:
+            return response.json()['links']['flickr_images']
+        #else:
+            #return
 
 
 def fetch_spacex_last_launch(spacex_id):
@@ -36,7 +34,7 @@ def fetch_spacex_last_launch(spacex_id):
     if not images_links:
         print(f'Фотографий запуска с номером {spacex_id} не найдено.')
         print('Осуществляется поиск фотогрфий последнего запуска.')
-        images_links = get_spacex_launch_links_latest()        
+        images_links = get_spacex_launch_links(latest=True)        
         if not images_links:
             print('Фотографии последнего запуска не найдены.')
             print('Загружаются фотографии запуска по умолчанию.')
