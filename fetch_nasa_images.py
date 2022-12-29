@@ -1,6 +1,6 @@
 import requests
 from random import randint
-from getimageslib import get_image, fetch_file_extension, nasa_api_key
+from getimageslib import get_image, fetch_file_extension, get_nasa_api_key
 
 
 def main():
@@ -16,7 +16,7 @@ def fetch_nasa_apod():
     def get_nasa_apod_links(images_count):
         
         url_params = {
-            'api_key': nasa_api_key,
+            'api_key': get_nasa_api_key(),
             'count': images_count
         }
         url = 'https://api.nasa.gov/planetary/apod'

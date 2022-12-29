@@ -5,10 +5,23 @@ from dotenv import load_dotenv
 from os import environ
 
 
-load_dotenv()
-telegram_token = environ['TELEGRAM_TOKEN']
-tg_chat_id = environ['TG_CHAT_ID']
-nasa_api_key = environ['NASA_API_KEY']
+def main():
+    pass
+    
+
+def get_telegram_token():
+    load_dotenv()
+    return environ['TELEGRAM_TOKEN']
+
+
+def get_tg_chat_id():
+    load_dotenv()
+    return environ['TG_CHAT_ID']
+
+
+def get_nasa_api_key():
+    load_dotenv()
+    return environ['NASA_API_KEY']
 
 
 def get_image(url, image_file, image_dir, url_params=None):
@@ -26,3 +39,6 @@ def fetch_file_extension(url):
 
     parsed_link = urlparse(url)    
     return Path(parsed_link.path).suffix
+
+if "_name_" == '__main__':
+    main()

@@ -1,5 +1,5 @@
 import requests
-from getimageslib import get_image, nasa_api_key
+from getimageslib import get_image, get_nasa_api_key
 
 
 def main():    
@@ -13,7 +13,7 @@ def main():
 def fetch_epic():
 
     url_params = {
-            'api_key': nasa_api_key}
+            'api_key': get_nasa_api_key()}
     
     def get_epic_links(url_params):
         
