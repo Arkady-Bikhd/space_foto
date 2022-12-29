@@ -10,7 +10,7 @@
 
 ```python
 NASA_API_KEY=ВАШ_API_key
-TG_TOKEN=ВАШ_ТОКЕН
+TELEGRAM_TOKEN=ВАШ_ТОКЕН
 TG_CHAT_ID=название телеграм-канала
 ```
 
