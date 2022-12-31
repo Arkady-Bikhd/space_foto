@@ -28,7 +28,8 @@ def fetch_nasa_apod():
     response = response.json() 
     image_dir = 'nasa_images'
     for link_number, link in enumerate(response):
-        image_link = link['hdurl']
+        if link['media_type'] == 'image':
+            image_link = link['hdurl']
         file_extension = fetch_file_extension(image_link)
         image_file = f'nasa{link_number}.{file_extension}'        
         get_image(image_link, image_file, image_dir)
