@@ -48,10 +48,11 @@ def create_parser_delay_time():
     parser = argparse.ArgumentParser(
         description='Программа загружает в телеграмм-канал фотографии'
     )
-    parser.add_argument('-t', '--dtime', default=14400, help='Введите время задержки загрузки файла в секундах')
+    parser.add_argument('-t', '--dtime', default=14400, type=int, 
+        help='Введите время задержки загрузки файла в секундах')
     args = parser.parse_args()
 
-    return int(args.dtime)
+    return args.dtime
 
 
 if __name__ == "__main__":
