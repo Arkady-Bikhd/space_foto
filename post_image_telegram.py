@@ -13,20 +13,20 @@ def main():
 
     load_dotenv()
     post_delay_time = create_parser_delay_time()
-    telegram_token = environ['TELEGRAM_TOKEN']    
+    telegram_token = environ['TELEGRAM_TOKEN'] 
+    tg_chat_id = environ['TG_CHAT_ID']   
     telegram_bot = telegram.Bot(telegram_token)
-    post_image(telegram_bot, post_delay_time)
+    post_image(telegram_bot, tg_chat_id, post_delay_time)
     
-
-def post_image(bot, post_delay_time=14400):       
-    
-    @retry(NetworkError, tries=3, delay=1, backoff=5)
-    def post_image_file(image_files, current_file):
-        tg_chat_id = environ['TG_CHAT_ID']       
-        with open(image_files[current_file], 'rb') as file:
+@retry(NetworkError, tries=3, delay=1, backoff=5)
+def post_image_file(image_files, current_file, tg_chat_id, bot):           
+    with open(image_files[current_file], 'rb') as file:
             bot.send_photo(chat_id=tg_chat_id, photo=file)
-                
-        
+
+
+def post_image(bot, tg_chat_id, post_delay_time=14400):      
+    
+    
     image_files = (path.resolve() for path in Path.cwd().glob("**/*") 
                     if path.suffix in {".png", ".gif", ".jpg", ".jpeg"})
     image_files = list(map(str, image_files))    
@@ -35,7 +35,7 @@ def post_image(bot, post_delay_time=14400):
     
     while True:        
         try:
-            post_image_file(image_files, current_file)
+            post_image_file(image_files, current_file, tg_chat_id, bot)
         except NetworkError:
             print('Ошибка подключения')                
         sleep(post_delay_time)

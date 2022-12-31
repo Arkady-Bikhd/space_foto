@@ -9,18 +9,18 @@ from os import environ
 def main():
 
     load_dotenv()
+    nasa_api_key = environ['NASA_API_KEY']
     images_count = create_parser_images_count()
     try:           
-        fetch_nasa_apod(images_count)        
+        fetch_nasa_apod(images_count, nasa_api_key)        
     except requests.exceptions.HTTPError:
         print('Неверная ссылка загрузку фотографий или неправильный api_key')
 
 
-def fetch_nasa_apod(images_count=None):
+def fetch_nasa_apod(images_count, nasa_api_key):
 
     if not images_count:
-        images_count = randint(30, 51)
-    nasa_api_key = environ['NASA_API_KEY']
+        images_count = randint(30, 51)    
     url_params = {
             'api_key': nasa_api_key,
             'count': images_count
@@ -47,6 +47,7 @@ def create_parser_images_count():
     args = parser.parse_args()
 
     return args.count
+
 
 if __name__ == "__main__":
     
