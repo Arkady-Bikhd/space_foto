@@ -7,7 +7,7 @@ from os import environ
 
 def main():
 
-    load_dotenv
+    load_dotenv()
     try:           
         fetch_nasa_apod()        
     except requests.exceptions.HTTPError:
