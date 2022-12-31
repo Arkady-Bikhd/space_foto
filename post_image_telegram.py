@@ -27,10 +27,9 @@ def post_image(bot, post_delay_time=14400):
             bot.send_photo(chat_id=tg_chat_id, photo=file)
                 
         
-
-    image_files = (path.resolve() for path in Path(Path.cwd()).glob("**/*") 
+    image_files = (path.resolve() for path in Path.cwd().glob("**/*") 
                     if path.suffix in {".png", ".gif", ".jpg", ".jpeg"})
-    image_files = list(map(str, image_files))
+    image_files = list(map(str, image_files))    
     shuffle(image_files) 
     current_file = 0
     
