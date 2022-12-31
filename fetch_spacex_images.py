@@ -32,7 +32,7 @@ def fetch_spacex_last_launch(spacex_id):
     images_links = get_spacex_launch_links(spacex_id)
     if not images_links:
         print(f'Фотографий запуска с номером {spacex_id} не найдено.')
-        print('Осуществляется поиск фотогрфий последнего запуска.')
+        print('Осуществляется поиск фотографий последнего запуска.')
         images_links = get_spacex_launch_links(latest=True)        
         if not images_links:
             print('Фотографии последнего запуска не найдены.')
