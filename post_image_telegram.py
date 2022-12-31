@@ -4,23 +4,27 @@ from pathlib import Path
 from random import shuffle
 from time import sleep
 import argparse
-from getimageslib import get_telegram_token, get_tg_chat_id
+from dotenv import load_dotenv
+from os import environ
 from retry import retry
 
 
 def main():
 
-    post_delay_time = create_parser_delay_time()    
-    telegram_bot = telegram.Bot(get_telegram_token())
+    load_dotenv()
+    post_delay_time = create_parser_delay_time()
+    telegram_token = environ['TELEGRAM_TOKEN']    
+    telegram_bot = telegram.Bot(telegram_token)
     post_image(telegram_bot, post_delay_time)
     
 
 def post_image(bot, post_delay_time=14400):       
     
     @retry(NetworkError, tries=3, delay=1, backoff=5)
-    def post_image_file(image_files, current_file):       
+    def post_image_file(image_files, current_file):
+        tg_chat_id = environ['TG_CHAT_ID']       
         with open(image_files[current_file], 'rb') as file:
-            bot.send_photo(chat_id=get_tg_chat_id(), photo=file)
+            bot.send_photo(chat_id=tg_chat_id, photo=file)
                 
         
 

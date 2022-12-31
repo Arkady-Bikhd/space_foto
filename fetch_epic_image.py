@@ -1,10 +1,13 @@
 import requests
-from getimageslib import get_image, get_nasa_api_key
+from getimageslib import get_image
 from datetime import datetime
+from dotenv import load_dotenv
+from os import environ
 
 
 def main():    
 
+    load_dotenv()
     try:
         fetch_epic()
     except requests.exceptions.HTTPError:
@@ -13,8 +16,9 @@ def main():
 
 def fetch_epic():
 
+    nasa_api_key = environ['NASA_API_KEY']
     url_params = {
-            'api_key': get_nasa_api_key()}
+            'api_key': nasa_api_key}
              
     url = 'https://api.nasa.gov/EPIC/api/natural/images'
     response = requests.get(url, params=url_params)

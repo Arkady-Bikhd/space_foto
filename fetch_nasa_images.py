@@ -1,10 +1,13 @@
 import requests
 from random import randint
-from getimageslib import get_image, fetch_file_extension, get_nasa_api_key
+from getimageslib import get_image, fetch_file_extension
+from dotenv import load_dotenv
+from os import environ
 
 
 def main():
 
+    load_dotenv
     try:           
         fetch_nasa_apod()        
     except requests.exceptions.HTTPError:
@@ -14,8 +17,9 @@ def main():
 def fetch_nasa_apod():
 
     images_count = randint(30, 51)
+    nasa_api_key = environ['NASA_API_KEY']
     url_params = {
-            'api_key': get_nasa_api_key(),
+            'api_key': nasa_api_key,
             'count': images_count
         }
     url = 'https://api.nasa.gov/planetary/apod'
