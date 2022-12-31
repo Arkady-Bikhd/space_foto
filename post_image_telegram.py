@@ -38,8 +38,7 @@ def post_image(bot, post_delay_time=14400):
         try:
             post_image_file(image_files, current_file)
         except NetworkError:
-            print('Ошибка подключения')
-            break    
+            print('Ошибка подключения')                
         sleep(post_delay_time)
         current_file += 1
                          
