@@ -33,9 +33,9 @@ def fetch_nasa_apod(images_count, nasa_api_key):
     for link_number, link in enumerate(response):
         if link['media_type'] == 'image':
             image_link = link['hdurl']
-        file_extension = fetch_file_extension(image_link)
-        image_file = f'nasa{link_number}.{file_extension}'        
-        get_image(image_link, image_file, image_dir)
+            file_extension = fetch_file_extension(image_link)
+            image_file = f'nasa{link_number}.{file_extension}'        
+            get_image(image_link, image_file, image_dir)
 
 def create_parser_images_count():
 
