@@ -32,12 +32,13 @@ def post_image(bot, tg_chat_id, post_delay_time=14400):
     image_files = list(map(str, image_files))    
     shuffle(image_files) 
     current_file = 0
-    
+    post_attempts_time = 3600
     while True:        
         try:
             post_image_file(image_files, current_file, tg_chat_id, bot)
         except NetworkError:
-            print('Ошибка подключения')                
+            print('Ошибка подключения')
+            sleep(post_attempts_time)                
         sleep(post_delay_time)
         current_file += 1
                          
