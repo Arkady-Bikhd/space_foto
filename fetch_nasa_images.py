@@ -19,8 +19,6 @@ def main():
 
 def fetch_nasa_apod(images_count, nasa_api_key):
 
-    if not images_count:
-        images_count = randint(30, 51)    
     url_params = {
             'api_key': nasa_api_key,
             'count': images_count
@@ -43,7 +41,7 @@ def create_parser_images_count():
         description='Программа загружает фотографии NASA'
         )
     parser.add_argument('-c', '--count', type=int, required=False,
-              help='Введите количество фотографий')
+              default=40, help='Введите количество фотографий')
     args = parser.parse_args()
 
     return args.count
