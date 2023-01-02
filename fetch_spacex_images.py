@@ -16,9 +16,7 @@ def get_spacex_launch_links(spacex_id):
     url = f'https://api.spacexdata.com/v3/launches/{spacex_id}'
     response = requests.get(url)    
     if response.ok:
-        return response.json()['links']['flickr_images']
-    else:
-        return
+        return response.json()['links']['flickr_images']    
 
 
 def get_spacex_launch_links_latest():
