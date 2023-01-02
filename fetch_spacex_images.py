@@ -32,12 +32,11 @@ def fetch_spacex_launch(spacex_id):
     images_links = None
     if spacex_id:
         images_links = get_spacex_launch_links(spacex_id)
-    if not images_links:
-        if spacex_id:
-            print(f'Фотографий запуска с номером {spacex_id} не найдено.')
-        else:
-            print('Осуществляется поиск фотографий последнего запуска.')
-            images_links = get_spacex_launch_links_latest()        
+    if not images_links and spacex_id:        
+        print(f'Фотографий запуска с номером {spacex_id} не найдено.')
+    else:
+        print('Осуществляется поиск фотографий последнего запуска.')
+        images_links = get_spacex_launch_links_latest()        
     if images_links:    
         image_dir = 'images'
         for link_number, link in enumerate(images_links):
